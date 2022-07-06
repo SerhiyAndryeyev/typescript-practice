@@ -5,7 +5,7 @@ enum QuestionStatus {
 }
 const req = {
     topicId: 5,
-    status: QuestionStatus
+    status: QuestionStatus.PUBLISHED
 }
 
 
