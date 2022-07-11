@@ -219,6 +219,7 @@ type U1 = unknown | number;  // type alias with unknown=unknown
 
 type I1 = unknown & string; // type intersection with unknown=some type(string)
 
+// Never
 
 
 
