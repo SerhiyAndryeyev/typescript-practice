@@ -220,10 +220,57 @@ type U1 = unknown | number;  // type alias with unknown=unknown
 type I1 = unknown & string; // type intersection with unknown=some type(string)
 
 // Never
+function genereateError(message: string): never {
+    throw new Error(message);
+}
 
+type paymentAction = 'refund' | 'checkout' | 'reject';
 
+function processAction(action: paymentAction) {
+    switch (action) {
+        case 'refund':
+            // ...
+            break;
+        case 'checkout':
+            // ...
+            break;
+        default:
+            const _: never = action;
+            throw new Error("There isn't the action");
+    }
+}
 
+function isString(x: string | number): boolean {
+    if (typeof x === 'string') {
+        return true;
+    } else if (typeof x === 'number') {
+        return false;
+    }
+    genereateError('sdfsadf');
+}
 
+// Null
+const n: null = null;
+const n2: any = null;
 
+interface UserNew {
+    name: string;
+}
 
+function getUser() {
+    if (Math.random() > 0.5) {
+        return null;
+    } else {
+        return {
+            name: 'someName'
+        } as User
+    }
+}
+
+const userNew = getUser();
+if (userNew) {
+    const n55 = userNew.name;
+}
+
+// Type assertion (Приведение типов)
 
