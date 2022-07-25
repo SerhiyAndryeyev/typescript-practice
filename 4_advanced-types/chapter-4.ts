@@ -273,4 +273,75 @@ if (userNew) {
 }
 
 // Type assertion (Приведение типов)
+let aaa = 5;
+let bbb: string = aaa.toString();
+let eee: string = new String(aaa).valueOf();
+let fff: boolean = new Boolean(aaa).valueOf();
 
+let ccc = 'sdfa';
+let ddd: number = parseInt(ccc); // or parseFloat(ccc);
+
+interface User4 {
+    name: string,
+    email: string,
+    login: string
+}
+
+const user4: User4 = {
+    name: 'Serhii',
+    email: 'serhii@gmail.com',
+    login: 'serhii'
+} // as User4
+interface Admin {
+    name: string,
+    role: number
+}
+
+const admin: Admin = {
+    ...user4, // bad way(email and login will be in admin)
+    role: 1
+}
+
+function userToAdmin(user: User4): Admin { // proper way
+    return {
+        name: user.login, // or name: user.name
+        role: 1
+    }
+}
+
+// Type Guard
+function logId2(id: string | number) {
+    if (typeof id === 'string') {
+        console.log(id);
+    } else {
+        console.log(id);
+    }
+}
+
+function logId2b(id: string | number) {
+    if (isString2(id)) {
+        console.log(id);
+    } else {
+        console.log(id);
+    }
+}
+
+function isString2(x: string | number): x is string {
+    return typeof x === 'string';
+}
+
+function isAdmin(user: User4 | Admin): user is Admin {
+    return 'role' in user
+}
+
+function isAdminAlternative(user: User4 | Admin): user is Admin {
+    return (user as Admin).role !== undefined;
+}
+
+function setRoleZero(user: User4 | Admin) {
+    if (isAdmin(user)) {
+        user.role = 0;
+    } else {
+        throw new Error('User not admin')
+    }
+}
